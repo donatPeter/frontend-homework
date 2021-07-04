@@ -8,6 +8,7 @@ import { setSelectedCompanyId } from "../store/actions";
 const StyledCompanyLinkName = styled.div<{ $isSelected: boolean }>`
   padding: 12px 17px;
   font-weight: bold;
+  color: ${({ $isSelected }) => ($isSelected ? "#157123" : "unset")};
   background: ${({ $isSelected }) =>
     $isSelected ? "rgba(55, 164, 71, 0.1)" : "unset"};
   &:hover {
