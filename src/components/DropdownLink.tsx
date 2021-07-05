@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
 import { Company, ReduxState } from "../types/types";
 import {
   getCompanies,
@@ -8,8 +7,8 @@ import {
   getSelectedCompanyId,
 } from "../store/selectors";
 import { toggleDropdownMenuVisibility } from "../store/actions";
-
 import DropdownMenu from "./DropdownMenu";
+import { useEffect, useRef } from "react";
 
 type ReduxProps = {
   isDropdownMenuVisible: boolean;
@@ -29,19 +28,37 @@ export const DropdownLink = ({
 }: ReduxProps & DispatchProps) => {
   const selectedCompanyName =
     companies && companies.find((i) => i.id === selectedCompanyId)?.name;
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside({ target }: MouseEvent) {
+      if (
+        ref?.current &&
+        // @ts-ignore
+        !ref?.current?.contains(target) &&
+        isDropdownMenuVisible
+      ) {
+        toggleDropdownMenuVisibility();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, toggleDropdownMenuVisibility, isDropdownMenuVisible]);
+
   return (
     <>
       <div
+        ref={ref}
         className="nav__link"
         onClick={toggleDropdownMenuVisibility}
         data-test-nav-link
       >
         <div className="nav__link-text-wrapper">
           <div className="nav__link-text">Elon Musk</div>
-
           <div className="nav__link-subtext">{selectedCompanyName}</div>
         </div>
-
         <i className="material-icons-outlined nav__link-icon">settings</i>
       </div>
 
