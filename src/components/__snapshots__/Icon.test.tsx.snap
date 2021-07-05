@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Icon /> renders icon 1`] = `
+<styled.i
+  $size="20px"
+  className="material-icons-outlined"
+>
+  done
+</styled.i>
+`;
