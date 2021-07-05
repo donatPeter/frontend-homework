@@ -31,19 +31,14 @@ export const DropdownLink = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside({ target }: MouseEvent) {
-      if (
-        ref?.current &&
-        // @ts-ignore
-        !ref?.current?.contains(target) &&
-        isDropdownMenuVisible
-      ) {
+    function handleClickOutside({ target }: any) {
+      if (!ref?.current?.contains(target) && isDropdownMenuVisible) {
         toggleDropdownMenuVisibility();
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseup", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mouseup", handleClickOutside);
     };
   }, [ref, toggleDropdownMenuVisibility, isDropdownMenuVisible]);
 
