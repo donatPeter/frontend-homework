@@ -2,9 +2,14 @@
 
 exports[`<CompanyLink /> renders link 1`] = `
 <styled.div
+  $isSelected={true}
   onClick={[Function]}
   role="menuitem"
 >
   Dummy Company
+  <Icon
+    icon="done"
+    size="20px"
+  />
 </styled.div>
 `;

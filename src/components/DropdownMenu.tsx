@@ -1,3 +1,4 @@
+import React from "react";
 import MenuLink from "./MenuLink";
 import Companies from "./Companies";
 import styled from "styled-components";

@@ -1,27 +1,32 @@
+import React from "react";
 import { shallow } from "enzyme";
-import { DropdownLink } from "./DropdownLink";
+import { DropdownLink, Props } from "./DropdownLink";
 
 describe("<DropdownLink />", () => {
   const toggleDropdownMenuVisibilityMock = jest.fn();
+  const initialProps: Props = {
+    toggleDropdownMenuVisibility: toggleDropdownMenuVisibilityMock,
+    isDropdownMenuVisible: true,
+    selectedCompanyId: 1,
+    companies: [],
+  };
 
-  const render = (props: any) =>
-    shallow(
-      <DropdownLink
-        toggleDropdownMenuVisibility={toggleDropdownMenuVisibilityMock}
-        {...props}
-      />
-    );
+  const render = (props: Props) => shallow(<DropdownLink {...props} />);
 
   it("renders without dropdown menu", () => {
-    expect(render({ isDropdownMenuVisible: false })).toMatchSnapshot();
+    expect(
+      render({ ...initialProps, isDropdownMenuVisible: false })
+    ).toMatchSnapshot();
   });
 
   it("renders with dropdown menu", () => {
-    expect(render({ isDropdownMenuVisible: true })).toMatchSnapshot();
+    expect(
+      render({ ...initialProps, isDropdownMenuVisible: true })
+    ).toMatchSnapshot();
   });
 
   it("calls toggleDropdownMenuVisibility when nav link is clicked", () => {
-    const component = render({ isDropdownMenuVisible: false });
+    const component = render({ ...initialProps, isDropdownMenuVisible: false });
     component.find("[data-test-nav-link]").simulate("click");
 
     expect(toggleDropdownMenuVisibilityMock).toHaveBeenCalled();
@@ -34,6 +39,7 @@ describe("<DropdownLink />", () => {
     ];
     const selectedCompanyId = 2;
     const component = render({
+      ...initialProps,
       isDropdownMenuVisible: false,
       companies,
       selectedCompanyId,

@@ -1,3 +1,4 @@
+import React from "react";
 import { Company } from "../types/types";
 import styled from "styled-components";
 import { Icon } from "./Icon";

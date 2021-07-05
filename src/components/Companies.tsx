@@ -1,9 +1,8 @@
+import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-
 import { ReduxState, Company } from "../types/types";
 import { getCompanies, getSelectedCompanyId } from "../store/selectors";
-
 import { CompanyLink } from "./CompanyLink";
 import styled from "styled-components";
 import {

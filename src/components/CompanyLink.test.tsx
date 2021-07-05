@@ -1,25 +1,20 @@
+import React from "react";
 import { shallow } from "enzyme";
 import { CompanyLink } from "./CompanyLink";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("<CompanyLink />", () => {
-  const toggleDropdownMenuVisibilityMock = jest.fn();
-  const setSelectedCompanyIdMock = jest.fn();
+  const onClickMock = jest.fn();
   const company = { id: 1, name: "Dummy Company" };
 
-  const wrapper = (props: any) =>
+  const wrapper = () =>
     shallow(
-      <CompanyLink
-        toggleDropdownMenuVisibility={toggleDropdownMenuVisibilityMock}
-        setSelectedCompanyId={setSelectedCompanyIdMock}
-        company={company}
-        {...props}
-      />
+      <CompanyLink onClick={onClickMock} company={company} isSelected={true} />
     );
 
   it("renders link", () => {
-    expect(wrapper({})).toMatchSnapshot();
+    expect(wrapper()).toMatchSnapshot();
   });
 
   it("invokes onClick callback on click", () => {

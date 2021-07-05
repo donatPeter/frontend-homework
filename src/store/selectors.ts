@@ -1,14 +1,14 @@
 import { ReduxState, Company } from "../types/types";
 
-export const getIsDropdownMenuVisible = (state: ReduxState) =>
+export const getIsDropdownMenuVisible = (state: ReduxState): boolean =>
   state.isDropdownMenuVisible;
 
 export const isCompanySelected = (
   state: ReduxState,
   props: { company: Company }
-) => state.selectedCompanyId === props.company.id;
+): boolean => state.selectedCompanyId === props.company.id;
 
-export const getCompanies = (state: ReduxState) => state.companies;
+export const getCompanies = (state: ReduxState): Company[] => state.companies;
 
-export const getSelectedCompanyId = (state: ReduxState) =>
+export const getSelectedCompanyId = (state: ReduxState): number | null =>
   state.selectedCompanyId;

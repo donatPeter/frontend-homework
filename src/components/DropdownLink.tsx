@@ -1,3 +1,4 @@
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Company, ReduxState } from "../types/types";
@@ -20,27 +21,34 @@ type DispatchProps = {
   toggleDropdownMenuVisibility: () => void;
 };
 
+export type Props = ReduxProps & DispatchProps;
+
 export const DropdownLink = ({
   isDropdownMenuVisible,
   toggleDropdownMenuVisibility,
   companies,
   selectedCompanyId,
-}: ReduxProps & DispatchProps) => {
+}: Props) => {
   const selectedCompanyName =
     companies && companies.find((i) => i.id === selectedCompanyId)?.name;
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    function handleClickOutside({ target }: any) {
+  const handleClickOutside = useCallback(
+    ({ target }: Event) => {
+      // @ts-ignore
       if (!ref?.current?.contains(target) && isDropdownMenuVisible) {
         toggleDropdownMenuVisibility();
       }
-    }
+    },
+    [isDropdownMenuVisible, toggleDropdownMenuVisibility]
+  );
+
+  useEffect(() => {
     document.addEventListener("mouseup", handleClickOutside);
     return () => {
       document.removeEventListener("mouseup", handleClickOutside);
     };
-  }, [ref, toggleDropdownMenuVisibility, isDropdownMenuVisible]);
+  }, [handleClickOutside]);
 
   return (
     <>

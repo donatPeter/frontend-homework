@@ -1,3 +1,4 @@
+import React from "react";
 import { shallow } from "enzyme";
 import { Companies, Title } from "./Companies";
 import { render } from "@testing-library/react";
