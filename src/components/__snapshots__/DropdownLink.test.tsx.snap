@@ -17,9 +17,7 @@ exports[`<DropdownLink /> renders with dropdown menu 1`] = `
       </div>
       <div
         className="nav__link-subtext"
-      >
-        Viljatootja AS
-      </div>
+      />
     </div>
     <i
       className="material-icons-outlined nav__link-icon"
@@ -48,9 +46,7 @@ exports[`<DropdownLink /> renders without dropdown menu 1`] = `
       </div>
       <div
         className="nav__link-subtext"
-      >
-        Viljatootja AS
-      </div>
+      />
     </div>
     <i
       className="material-icons-outlined nav__link-icon"

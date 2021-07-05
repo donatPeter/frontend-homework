@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Companies /> renders list of company links 1`] = `
+<styled.div>
+  <styled.p>
+    Your companies
+  </styled.p>
+  <Connect(CompanyLink)
+    company={
+      Object {
+        "id": 1,
+        "name": "Dummy company",
+      }
+    }
+    key="1"
+  />
+  <Connect(CompanyLink)
+    company={
+      Object {
+        "id": 2,
+        "name": "Smarty company",
+      }
+    }
+    key="2"
+  />
+</styled.div>
+`;

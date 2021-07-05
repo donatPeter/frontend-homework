@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MenuLink /> renders link 1`] = `
+<styled.a
+  $color="inherit"
+  href=""
+>
+  <Icon
+    icon="phone"
+    size="20px"
+  />
+  <styled.span>
+    Call me
+  </styled.span>
+</styled.a>
+`;
