@@ -11,6 +11,7 @@ const Title = styled.p`
   text-transform: uppercase;
   color: #717175;
   margin: 12px 16px 4px 16px;
+  font-weight: bold;
 `;
 
 const CompaniesContainer = styled.div`

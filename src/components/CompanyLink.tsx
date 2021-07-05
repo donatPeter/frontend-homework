@@ -3,9 +3,16 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { getSelectedCompanyId } from "../store/selectors";
 import { createStructuredSelector } from "reselect";
-import { setSelectedCompanyId } from "../store/actions";
+import {
+  setSelectedCompanyId,
+  toggleDropdownMenuVisibility,
+} from "../store/actions";
+import { Icon } from "./Icon";
 
 const StyledCompanyLinkName = styled.div<{ $isSelected: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 12px 17px;
   font-weight: bold;
   color: ${({ $isSelected }) => ($isSelected ? "#157123" : "unset")};
@@ -22,6 +29,7 @@ const StyledCompanyLinkName = styled.div<{ $isSelected: boolean }>`
   &:active {
     background: #eeeef2;
   }
+  cursor: pointer;
 `;
 
 interface Props {
@@ -34,14 +42,19 @@ type ReduxProps = {
 
 type DispatchProps = {
   setSelectedCompanyId: (id: number) => void;
+  toggleDropdownMenuVisibility: () => void;
 };
 
 const CompanyLink = ({
   company: { name, id },
   selectedCompanyId,
   setSelectedCompanyId,
+  toggleDropdownMenuVisibility,
 }: Props & ReduxProps & DispatchProps) => {
-  const handleCompanySelect = () => setSelectedCompanyId(id);
+  const handleCompanySelect = () => {
+    setSelectedCompanyId(id);
+    if (selectedCompanyId !== id) toggleDropdownMenuVisibility();
+  };
 
   return (
     <StyledCompanyLinkName
@@ -49,7 +62,7 @@ const CompanyLink = ({
       onClick={handleCompanySelect}
     >
       {name}
-      <i />
+      {selectedCompanyId === id && <Icon icon="done" size="20px" />}
     </StyledCompanyLinkName>
   );
 };
@@ -58,5 +71,5 @@ export default connect(
   createStructuredSelector<ReduxState, ReduxProps>({
     selectedCompanyId: getSelectedCompanyId,
   }),
-  { setSelectedCompanyId }
+  { setSelectedCompanyId, toggleDropdownMenuVisibility }
 )(CompanyLink);

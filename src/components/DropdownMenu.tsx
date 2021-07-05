@@ -9,6 +9,9 @@ const DropdownMenuContainer = styled.div`
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(51, 51, 51, 0.24);
   border-radius: 8px;
+
+  position: absolute;
+  top: 65px;
 `;
 
 const DropdownMenuList = styled.div`
@@ -17,16 +20,10 @@ const DropdownMenuList = styled.div`
   align-items: flex-start;
 `;
 
-const Separator = styled.div`
-  position: absolute;
-  height: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-
-  /* Grey/Grey 3 */
-
-  border: 1px solid #dcdce0;
+const LinksContainer = styled.div`
+  padding: 8px 0;
+  width: 100%;
+  border-bottom: 1px solid #dcdce0;
 `;
 
 const DropdownMenu = () => (
@@ -34,7 +31,7 @@ const DropdownMenu = () => (
     <DropdownMenuList>
       <Companies />
 
-      <div>
+      <LinksContainer>
         <MenuLink
           text="Get the mobile app"
           icon="phone_iphone"
@@ -42,12 +39,17 @@ const DropdownMenu = () => (
         />
         <MenuLink text="Community" icon="people" href="/community" />
         <MenuLink text="Knowledge base" icon="book" href="/help" />
-      </div>
+      </LinksContainer>
 
-      <div>
+      <LinksContainer>
         <MenuLink text="Settings" icon="settings" href="/settings" />
-        <MenuLink text="Log out" icon="exit_to_app" href="/logout" />
-      </div>
+        <MenuLink
+          text="Log out"
+          icon="exit_to_app"
+          href="/logout"
+          color="#D33649"
+        />
+      </LinksContainer>
     </DropdownMenuList>
   </DropdownMenuContainer>
 );
