@@ -12,7 +12,7 @@ exports[`<Companies /> renders list of company links 1`] = `
         "name": "Dummy company",
       }
     }
-    isSelected={false}
+    isSelected={true}
     key="1"
     onClick={[Function]}
   />
