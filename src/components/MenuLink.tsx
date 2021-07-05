@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Icon } from "./Icon";
+import { Link } from "react-router-dom";
 
 type Props = {
   text: string;
@@ -9,10 +10,10 @@ type Props = {
   color?: string;
 };
 
-export const StyledLink = styled.a<{ $color: string }>`
+export const StyledLink = styled(Link)`
   display: flex;
   text-decoration: none;
-  color: ${({ $color }) => $color};
+  color: ${(props) => props.color};
   align-items: center;
   padding: 6px 16px;
 `;
@@ -22,7 +23,7 @@ export const MenuText = styled.span`
 `;
 
 const MenuLink = ({ icon, text, href, color }: Props) => (
-  <StyledLink href={href} $color={color || "inherit"}>
+  <StyledLink to={href} color={color || "inherit"}>
     <Icon icon={icon} size="20px" />
     <MenuText>{text}</MenuText>
   </StyledLink>
