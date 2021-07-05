@@ -26,4 +26,19 @@ describe("<DropdownLink />", () => {
 
     expect(toggleDropdownMenuVisibilityMock).toHaveBeenCalled();
   });
+
+  it("display selected company name", () => {
+    const companies = [
+      { id: 1, name: "Dummy company" },
+      { id: 2, name: "Smarty company" },
+    ];
+    const selectedCompanyId = 2;
+    const component = render({
+      isDropdownMenuVisible: false,
+      companies,
+      selectedCompanyId,
+    });
+
+    expect(component.find(".nav__link-subtext").text()).toBe("Smarty company");
+  });
 });
