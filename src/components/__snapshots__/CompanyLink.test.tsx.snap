@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CompanyLink /> renders link 1`] = `
+<styled.div
+  onClick={[Function]}
+  role="menuitem"
+>
+  Dummy Company
+</styled.div>
+`;

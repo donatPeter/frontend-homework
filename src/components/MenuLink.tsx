@@ -8,7 +8,7 @@ type Props = {
   color?: string;
 };
 
-const StyledLink = styled.a<{ $color: string }>`
+export const StyledLink = styled.a<{ $color: string }>`
   display: flex;
   text-decoration: none;
   color: ${({ $color }) => $color};
@@ -16,7 +16,7 @@ const StyledLink = styled.a<{ $color: string }>`
   padding: 6px 16px;
 `;
 
-const MenuText = styled.span`
+export const MenuText = styled.span`
   margin-left: 8px;
 `;
 

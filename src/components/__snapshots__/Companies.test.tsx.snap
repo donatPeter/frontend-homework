@@ -5,23 +5,27 @@ exports[`<Companies /> renders list of company links 1`] = `
   <styled.p>
     Your companies
   </styled.p>
-  <Connect(CompanyLink)
+  <CompanyLink
     company={
       Object {
         "id": 1,
         "name": "Dummy company",
       }
     }
+    isSelected={false}
     key="1"
+    onClick={[Function]}
   />
-  <Connect(CompanyLink)
+  <CompanyLink
     company={
       Object {
         "id": 2,
         "name": "Smarty company",
       }
     }
+    isSelected={false}
     key="2"
+    onClick={[Function]}
   />
 </styled.div>
 `;

@@ -1,12 +1,5 @@
-import { Company, ReduxState } from "../types/types";
+import { Company } from "../types/types";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { getSelectedCompanyId } from "../store/selectors";
-import { createStructuredSelector } from "reselect";
-import {
-  setSelectedCompanyId,
-  toggleDropdownMenuVisibility,
-} from "../store/actions";
 import { Icon } from "./Icon";
 
 const StyledCompanyLinkName = styled.div<{ $isSelected: boolean }>`
@@ -34,42 +27,27 @@ const StyledCompanyLinkName = styled.div<{ $isSelected: boolean }>`
 
 interface Props {
   company: Company;
+  isSelected: boolean;
+  onClick: (companyId: number) => void;
 }
 
-type ReduxProps = {
-  selectedCompanyId: number | null;
-};
-
-type DispatchProps = {
-  setSelectedCompanyId: (id: number) => void;
-  toggleDropdownMenuVisibility: () => void;
-};
-
-const CompanyLink = ({
+export const CompanyLink = ({
   company: { name, id },
-  selectedCompanyId,
-  setSelectedCompanyId,
-  toggleDropdownMenuVisibility,
-}: Props & ReduxProps & DispatchProps) => {
+  isSelected,
+  onClick,
+}: Props) => {
   const handleCompanySelect = () => {
-    setSelectedCompanyId(id);
-    if (selectedCompanyId !== id) toggleDropdownMenuVisibility();
+    onClick(id);
   };
 
   return (
     <StyledCompanyLinkName
-      $isSelected={selectedCompanyId === id}
+      role="menuitem"
+      $isSelected={isSelected}
       onClick={handleCompanySelect}
     >
       {name}
-      {selectedCompanyId === id && <Icon icon="done" size="20px" />}
+      {isSelected && <Icon icon="done" size="20px" />}
     </StyledCompanyLinkName>
   );
 };
-
-export default connect(
-  createStructuredSelector<ReduxState, ReduxProps>({
-    selectedCompanyId: getSelectedCompanyId,
-  }),
-  { setSelectedCompanyId, toggleDropdownMenuVisibility }
-)(CompanyLink);
