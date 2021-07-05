@@ -5,7 +5,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("<Companies />", () => {
-  const toggleDropdownMenuVisibilityMock = jest.fn();
+  const closeDropdownMock = jest.fn();
   const setSelectedCompanyIdMock = jest.fn();
   const companies = [
     { id: 1, name: "Dummy company" },
@@ -17,7 +17,7 @@ describe("<Companies />", () => {
       shallow(
         <Companies
           setSelectedCompanyId={setSelectedCompanyIdMock}
-          toggleDropdownMenuVisibility={toggleDropdownMenuVisibilityMock}
+          closeDropdown={closeDropdownMock}
           selectedCompanyId={1}
           companies={companies}
         />
@@ -29,7 +29,7 @@ describe("<Companies />", () => {
     const wrapper = shallow(
       <Companies
         setSelectedCompanyId={setSelectedCompanyIdMock}
-        toggleDropdownMenuVisibility={toggleDropdownMenuVisibilityMock}
+        closeDropdown={closeDropdownMock}
         selectedCompanyId={1}
         companies={companies}
       />
@@ -38,20 +38,20 @@ describe("<Companies />", () => {
     expect(wrapper.find(Title).text()).toBe("Your companies");
   });
 
-  it("invoke setSelectedCompanyId and toggleDropdownMenuVisibility on click", () => {
+  it("invoke setSelectedCompanyId and closeDropdown on click", () => {
     const { getByText } = render(
       <Companies
         setSelectedCompanyId={setSelectedCompanyIdMock}
-        toggleDropdownMenuVisibility={toggleDropdownMenuVisibilityMock}
+        closeDropdown={closeDropdownMock}
         selectedCompanyId={1}
         companies={companies}
       />
     );
 
     expect(setSelectedCompanyIdMock).not.toHaveBeenCalled();
-    expect(toggleDropdownMenuVisibilityMock).not.toHaveBeenCalled();
+    expect(closeDropdownMock).not.toHaveBeenCalled();
     userEvent.click(getByText("Smarty company"));
     expect(setSelectedCompanyIdMock).toHaveBeenCalledWith(2);
-    expect(toggleDropdownMenuVisibilityMock).toHaveBeenCalledTimes(1);
+    expect(closeDropdownMock).toHaveBeenCalledTimes(1);
   });
 });

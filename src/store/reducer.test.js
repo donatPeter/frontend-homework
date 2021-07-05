@@ -1,4 +1,4 @@
-import * as actions from "./actions";
+import { setSelectedCompanyId, closeDropdown, openDropdown } from "./actions";
 import { isDropdownMenuVisible, selectedCompanyId } from "./reducer";
 
 const doesNotUpdateState = (reducer, initialState) => {
@@ -8,10 +8,12 @@ const doesNotUpdateState = (reducer, initialState) => {
 };
 
 describe("isDropdownMenuVisible()", () => {
-  it("toggles state on actions.toggleDropdownMenuVisibility", () => {
-    expect(
-      isDropdownMenuVisible(false, actions.toggleDropdownMenuVisibility())
-    ).toBe(true);
+  it("set isDropdownMenuVisible state to false on closeDropdown", () => {
+    expect(isDropdownMenuVisible(true, closeDropdown())).toBe(false);
+  });
+
+  it("set isDropdownMenuVisible state to true on openDropdown", () => {
+    expect(isDropdownMenuVisible(true, openDropdown())).toBe(true);
   });
 
   doesNotUpdateState(isDropdownMenuVisible, false);
@@ -19,9 +21,7 @@ describe("isDropdownMenuVisible()", () => {
 
 describe("selectedCompanyId()", () => {
   it("sets given value to state on actions.setSelectedCompanyId", () => {
-    expect(selectedCompanyId(null, actions.setSelectedCompanyId(123))).toBe(
-      123
-    );
+    expect(selectedCompanyId(null, setSelectedCompanyId(123))).toBe(123);
   });
 
   doesNotUpdateState(selectedCompanyId, null);

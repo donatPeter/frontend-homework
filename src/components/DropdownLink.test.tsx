@@ -3,9 +3,12 @@ import { shallow } from "enzyme";
 import { DropdownLink, Props } from "./DropdownLink";
 
 describe("<DropdownLink />", () => {
-  const toggleDropdownMenuVisibilityMock = jest.fn();
+  const openDropdownMock = jest.fn();
+  const closeDropdownMock = jest.fn();
+
   const initialProps: Props = {
-    toggleDropdownMenuVisibility: toggleDropdownMenuVisibilityMock,
+    openDropdown: openDropdownMock,
+    closeDropdown: closeDropdownMock,
     isDropdownMenuVisible: true,
     selectedCompanyId: 1,
     companies: [],
@@ -25,11 +28,11 @@ describe("<DropdownLink />", () => {
     ).toMatchSnapshot();
   });
 
-  it("calls toggleDropdownMenuVisibility when nav link is clicked", () => {
+  it("calls openDropdown when nav link is clicked", () => {
     const component = render({ ...initialProps, isDropdownMenuVisible: false });
     component.find("[data-test-nav-link]").simulate("click");
 
-    expect(toggleDropdownMenuVisibilityMock).toHaveBeenCalled();
+    expect(openDropdownMock).toHaveBeenCalled();
   });
 
   it("display selected company name", () => {

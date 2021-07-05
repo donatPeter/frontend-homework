@@ -4,9 +4,9 @@ import { createReducer } from "typesafe-actions";
 import { Action, Company } from "../types/types";
 import * as actions from "./actions";
 
-export const isDropdownMenuVisible = createReducer<boolean, Action>(
-  false
-).handleAction(actions.toggleDropdownMenuVisibility, (state) => !state);
+export const isDropdownMenuVisible = createReducer<boolean, Action>(false)
+  .handleAction(actions.closeDropdown, () => false)
+  .handleAction(actions.openDropdown, () => true);
 
 export const selectedCompanyId = createReducer<number | null, Action>(
   null

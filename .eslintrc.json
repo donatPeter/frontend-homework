@@ -16,7 +16,8 @@
   "rules": {
     "prettier/prettier": "error",
     "react-hooks/exhaustive-deps": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "env": {
     "jest": true

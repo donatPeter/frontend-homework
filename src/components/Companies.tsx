@@ -5,10 +5,7 @@ import { ReduxState, Company } from "../types/types";
 import { getCompanies, getSelectedCompanyId } from "../store/selectors";
 import { CompanyLink } from "./CompanyLink";
 import styled from "styled-components";
-import {
-  setSelectedCompanyId,
-  toggleDropdownMenuVisibility,
-} from "../store/actions";
+import { setSelectedCompanyId, closeDropdown } from "../store/actions";
 
 export const Title = styled.p`
   text-transform: uppercase;
@@ -29,19 +26,19 @@ type ReduxProps = {
 
 type DispatchProps = {
   setSelectedCompanyId: (id: number) => void;
-  toggleDropdownMenuVisibility: () => void;
+  closeDropdown: () => void;
 };
 
 export const Companies = ({
   companies,
   selectedCompanyId,
   setSelectedCompanyId,
-  toggleDropdownMenuVisibility,
+  closeDropdown,
 }: ReduxProps & DispatchProps) => {
   const handleOnClick = (companyId: number) => {
     setSelectedCompanyId(companyId);
     if (selectedCompanyId !== companyId) {
-      toggleDropdownMenuVisibility();
+      closeDropdown();
     }
   };
   return (
@@ -65,5 +62,5 @@ export default connect(
     companies: getCompanies,
     selectedCompanyId: getSelectedCompanyId,
   }),
-  { setSelectedCompanyId, toggleDropdownMenuVisibility }
+  { setSelectedCompanyId, closeDropdown }
 )(Companies);

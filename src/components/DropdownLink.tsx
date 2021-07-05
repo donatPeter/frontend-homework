@@ -7,7 +7,7 @@ import {
   getIsDropdownMenuVisible,
   getSelectedCompanyId,
 } from "../store/selectors";
-import { toggleDropdownMenuVisibility } from "../store/actions";
+import { openDropdown, closeDropdown } from "../store/actions";
 import DropdownMenu from "./DropdownMenu";
 import { useEffect, useRef } from "react";
 
@@ -18,44 +18,45 @@ type ReduxProps = {
 };
 
 type DispatchProps = {
-  toggleDropdownMenuVisibility: () => void;
+  openDropdown: () => void;
+  closeDropdown: () => void;
 };
 
 export type Props = ReduxProps & DispatchProps;
 
 export const DropdownLink = ({
   isDropdownMenuVisible,
-  toggleDropdownMenuVisibility,
+  openDropdown,
+  closeDropdown,
   companies,
   selectedCompanyId,
 }: Props) => {
   const selectedCompanyName =
     companies && companies.find((i) => i.id === selectedCompanyId)?.name;
-  const ref = useRef<HTMLDivElement>(null);
+  const refObject = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = useCallback(
-    ({ target }: Event) => {
-      // @ts-ignore
-      if (!ref?.current?.contains(target) && isDropdownMenuVisible) {
-        toggleDropdownMenuVisibility();
+    ({ target }: any) => {
+      if (!refObject?.current?.contains(target) && isDropdownMenuVisible) {
+        closeDropdown();
       }
     },
-    [isDropdownMenuVisible, toggleDropdownMenuVisibility]
+    [isDropdownMenuVisible, closeDropdown]
   );
 
   useEffect(() => {
-    document.addEventListener("mouseup", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener("mouseup", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [handleClickOutside]);
 
   return (
     <>
       <div
-        ref={ref}
+        ref={refObject}
         className="nav__link"
-        onClick={toggleDropdownMenuVisibility}
+        onClick={isDropdownMenuVisible ? closeDropdown : openDropdown}
         data-test-nav-link
       >
         <div className="nav__link-text-wrapper">
@@ -76,5 +77,5 @@ export default connect(
     companies: getCompanies,
     selectedCompanyId: getSelectedCompanyId,
   }),
-  { toggleDropdownMenuVisibility }
+  { openDropdown, closeDropdown }
 )(DropdownLink);
