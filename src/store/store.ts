@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./reducer";
 import { ReduxState } from "../types/types";
 
-const initialState: ReduxState = {
+export const initialState: ReduxState = {
   isDropdownMenuVisible: false,
   selectedCompanyId: 1,
   companies: [
